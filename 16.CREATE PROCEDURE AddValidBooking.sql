@@ -2,31 +2,31 @@ DROP PROCEDURE IF EXISTS AddValidBooking;
 
 CREATE PROCEDURE AddValidBooking(
     IN p_BookingDate DATE,
-    IN p_BookingTime DATETIME,
-    IN p_TableNumber INT
+    IN p_BookingTime TIME,
+    IN p_TableNumber INT,
+    IN p_CustomerID INT
 )
 BEGIN
-    DECLARE BookingCount INT;
+    DECLARE tableAlreadyBooked INT DEFAULT 0;
 
-    -- Start a transaction
     START TRANSACTION;
 
     -- Check if the table is already booked on the given date and time
-    SELECT COUNT(*) INTO BookingCount
+    SELECT COUNT(*) INTO tableAlreadyBooked
     FROM Booking
     WHERE TableNumber = p_TableNumber
     AND BookingDate = p_BookingDate
-    AND BookingTime <> p_BookingTime; -- Ensure the time is different, considering overlapping reservations
+    AND BookingTime = p_BookingTime;
 
-    -- If the table is already booked, rollback the transaction
-    IF BookingCount > 0 THEN
+    IF tableAlreadyBooked > 0 THEN
+        -- Table is already booked, rollback the transaction
         ROLLBACK;
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Table already booked for the given date and time';
+            SET MESSAGE_TEXT = 'Table is already booked on the specified date and time.';
     ELSE
-        -- If the table is available, insert the new booking record and commit the transaction
-        INSERT INTO Booking (BookingDate, BookingTime, TableNumber)
-        VALUES (p_BookingDate, p_BookingTime, p_TableNumber);
+        -- Table is available, commit the transaction and add the new booking
+        INSERT INTO Booking (BookingDate, BookingTime, TableNumber, CustomerID)
+        VALUES (p_BookingDate, p_BookingTime, p_TableNumber, p_CustomerID);
 
         COMMIT;
     END IF;
