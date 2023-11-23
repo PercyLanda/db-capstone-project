@@ -1,7 +1,8 @@
 USE LittleLemonDB;
-CALL CancelBooking(1);
+-- replace with the BookingID to be canceled 
+CALL CancelBooking(30);
 -- Output: +------------------------+
 --         | ConfirmationMessage   |
 --         +------------------------+
---         | Booking 1 Canceled    |
+--         | BookingID Canceled    |
 --         +------------------------+
