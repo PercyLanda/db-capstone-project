@@ -25,10 +25,7 @@ This project is the capstone for the Coursera Database Engineering Professional 
 - **Jupyter Notebooks**: Interactive environments to execute SQL code.
 
 ## How to Run the Project
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/your-username/db-capstone-project.git
-   ```
+1. Clone this repository to your local machine.
 2. Import the SQL scripts into a MySQL database.
 3. Use the stored procedures and queries provided to interact with the database.
 4. Open the Tableau files for data visualization.
