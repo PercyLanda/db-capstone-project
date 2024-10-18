@@ -41,4 +41,4 @@ This project is the capstone for the Coursera Database Engineering Professional 
 - **Technologies Used**: Listing tools and technologies employed.
 - **Project Contents**: Detailed explanation of what files or folders contain.
 - **How to Run the Project**: Step-by-step instructions for others who might want to use or replicate your work.
-- **Future Improvements**: Mention potential upgrades or next steps.
+- **Future Improvements**: Potential upgrades or next steps.
